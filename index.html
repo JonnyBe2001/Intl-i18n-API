@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/style.css" />
+    <link rel="stylesheet" href="static/hljs-default.css" />
+    <title>i18n</title>
+    <script src="static/script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h2>Kurzanleitung <br/> Intl (i18n/internationalization) API</h2>
+    </header>
+    <main>
+        <h3>Wozu braucht es diese WEB-API</h3>
+        Eine Internationalisierungs-API (i18n-API) ist ein wichtiges Werkzeug für Entwickler,
+        um die <strong>internationale Nutzung</strong> ihrer Anwendung zu ermöglichen:
+        </p>
+        <ul>
+            <li><strong>Mehrsprachige Unterstützung: </strong>Texte und Inhalte können in verschiedenen Sprachen
+                verwaltet werden.</li>
+            <li><strong>Anpassung an regionale Unterschiede: </strong>Unterschiede in Datums- und Zeitformate,
+                Währungen, Zahlenformate und Schreibweisen können berücksichtigt und angepasst werden.</li>
+        </ul>
+        <p><strong>Beachte: Diese API dient lediglich der Formatierung und beachtet deshalb nicht:</strong></p>
+        <ul>
+            <li>Zeitzonen</li>
+            <li>Umrechnung von Währungen</li>
+            <li>Umrechnung von Maßeinheiten</li>
+            <li>Umrechnung von Gewichten</li>
+            <li>...</li>
+        </ul>
+        <p> Für die Berücksichtigung dieser Eigenschaften müssen andere Web APIs eingebunden werden, wie beispielsweise
+            die Geolocation-API für eine Zeitzonen-Berücksichtigung</p>
+        <br>
+        <h3>Demo</h3>
+        <div id="buttonBox">
+            <button id="de-DE" onclick="countryFormat('de-DE', 'EUR', 'meter', 'kilogram')">Deutschland (DE)</button>
+            <button id="ja-JP" onclick="countryFormat('ja-JP', 'JPY', 'meter', 'kilogram')">Japan (JP)</button>
+            <button id="en-US" onclick="countryFormat('en-US', 'USD', 'foot', 'pound')">USA (US)</button>
+            <button id="en-NZ" onclick="countryFormat('en-NZ', 'NZD', 'meter', 'kilogram')">Neuseeland (NZ)</button>
+            <button id="fr-FR" onclick="countryFormat('fr-FR', 'EUR', 'meter', 'kilogram')">Frankreich (FR)</button>
+        </div>
+
+        <div id="showBox">
+            <table>
+                <tr>
+                    <th id="col1">Typ</th>
+                    <th id="col2">Beispiel</th>
+                </tr>
+                <tr>
+                    <td>Datum</td>
+                    <td id="date"></td>
+                </tr>
+                <tr>
+                    <td>Uhrzeit</td>
+                    <td id="dayTime"></td>
+                </tr>
+                <tr>
+                    <td>Währung</td>
+                    <td id="currency"></td>
+                </tr>
+                <tr>
+                    <td>Zahl</td>
+                    <td id="number"></td>
+                </tr>
+                <tr>
+                    <td>Länge</td>
+                    <td id="length"></td>
+                </tr>
+                <tr>
+                    <td>Gewicht</td>
+                    <td id="weight"></td>
+                </tr>
+                <tr>
+                    <td>Land</td>
+                    <td id="country"></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <h3>Codebeispiel</h3>
+        <label for="commented">With comments:</label>
+        <div id="commented"><pre><code class="language-js"> 
+    //countryFormat() wird  durch durch den Klick auf einen Button ausgelöst und der zum Button gehörende languageCode mitgegegeben
+    function countryFormat(languageCode){
+        //Formatierungsangaben des Datums:
+        const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+        //aktuelles Datum:
+        const time = new Date();
+        //Formatierung des Datums:
+        const formattedDate = new Intl.DateTimeFormat(languageCode, dateOptions).format(time);
+        //Ausgabe des formatierten Datums:
+        document.querySelector("#date").innerHTML=formattedDate;
+    }
+      </code></pre></div>
+
+      <label for="uncommented">Without comments:</label>
+      <div id="uncommented"><pre><code class="language-js"> 
+        function countryFormat(languageCode){
+            const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+            const time = new Date();
+            const formattedDate = new Intl.DateTimeFormat(languageCode, dateOptions).format(time);
+            document.querySelector("#date").innerHTML=formattedDate;
+        }
+          </code></pre></div>
+      <br>
+        <h3>Weiterführende Links:</h3>
+        <ul>
+            <li>
+                Mdn: <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl?retiredLocale=de">Beispiel</a>
+            </li>
+            <li>
+                Sitepoint: <a
+                    href="https://www.sitepoint.com/how-to-implement-internationalization-i18n-in-javascript/">Beispiel</a>
+            </li>
+        </ul>
+    </main>
+    <footer>von Simon Vier, Pia Kühnle, Jonas Bauer - WT2</footer>
+    <!--Neccesary for code highlighting below - just dont touch it-->
+    <script src="static/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</body>
+
+</html>
